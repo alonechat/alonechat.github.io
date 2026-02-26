@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AloneChat - Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #e8e8e8;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 50px;
+        }
+
+        .title-area {
+            flex: 1;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: #888;
+            text-decoration: none;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #67c23a;
+        }
+
+        .main-title {
+            font-size: 80px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            line-height: 1.1;
+            color: #f5f5f5;
+        }
+
+        .main-title .highlight {
+            color: transparent;
+            -webkit-text-stroke: 2px #67c23a;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            color: #888;
+            letter-spacing: 3px;
+            margin-top: 15px;
+        }
+
+        .architecture-preview {
+            width: 240px;
+            height: 320px;
+            border: 2px solid #4a4a4a;
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-left: 40px;
+        }
+
+        .arch-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .arch-dot {
+            width: 8px;
+            height: 8px;
+            border: 1px solid #4a4a4a;
+            border-radius: 50%;
+        }
+
+        .arch-section {
+            border: 1px solid #4a4a4a;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 11px;
+            color: #888;
+        }
+
+        .arch-section-title {
+            font-size: 10px;
+            color: #67c23a;
+            margin-bottom: 4px;
+        }
+
+        .arch-item {
+            font-size: 10px;
+            color: #666;
+            margin: 2px 0;
+        }
+
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #67c23a;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            margin-top: 30px;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .description {
+            font-size: 14px;
+            font-weight: 300;
+            color: #888;
+            line-height: 1.9;
+            max-width: 700px;
+            letter-spacing: 0.5px;
+        }
+
+        .description a {
+            color: #67c23a;
+            text-decoration: none;
+        }
+
+        .description a:hover {
+            opacity: 0.7;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 700px;
+            margin-top: 10px;
+        }
+
+        .feature-item {
+            border: 1px solid #4a4a4a;
+            border-radius: 10px;
+            padding: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .feature-item:hover {
+            border-color: #67c23a;
+        }
+
+        .feature-name {
+            font-size: 13px;
+            font-weight: 400;
+            color: #e8e8e8;
+            margin-bottom: 6px;
+        }
+
+        .feature-desc {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tech-tag {
+            font-size: 12px;
+            color: #888;
+            border: 1px solid #4a4a4a;
+            border-radius: 15px;
+            padding: 5px 15px;
+        }
+
+        .code-block {
+            background-color: #1a1a1a;
+            border: 1px solid #4a4a4a;
+            border-radius: 8px;
+            padding: 15px 20px;
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+            max-width: 500px;
+            overflow-x: auto;
+        }
+
+        .code-block .comment {
+            color: #4a4a4a;
+        }
+
+        .code-block .command {
+            color: #67c23a;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .link-item {
+            font-size: 14px;
+            font-weight: 300;
+            color: #888;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .link-item:hover {
+            color: #67c23a;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #4a4a4a;
+            letter-spacing: 1px;
+        }
+
+        .warning-box {
+            background-color: rgba(245, 108, 108, 0.1);
+            border: 1px solid rgba(245, 108, 108, 0.3);
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 12px;
+            color: #f56c6c;
+            margin-top: 15px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1200px) {
+            .main-title {
+                font-size: 60px;
+            }
+
+            .architecture-preview {
+                width: 200px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 30px;
+            }
+
+            .main-title {
+                font-size: 40px;
+                letter-spacing: 3px;
+            }
+
+            .header-section {
+                flex-direction: column;
+            }
+
+            .architecture-preview {
+                margin-left: 0;
+                margin-top: 30px;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-section">
+            <div class="title-area">
+                <a href="index.html" class="back-link">← BACK</a>
+                <div class="main-title">
+                    AL<span class="highlight">ON</span>ECHAT
+                </div>
+                <div class="subtitle">A SECURE, MODULAR CHAT APPLICATION</div>
+            </div>
+
+            <div class="architecture-preview">
+                <div class="arch-header">
+                    <div class="arch-dot"></div>
+                    <div class="arch-dot"></div>
+                </div>
+                <div class="arch-section">
+                    <div class="arch-section-title">CLIENT</div>
+                    <div class="arch-item">GUI (customtkinter)</div>
+                    <div class="arch-item">TUI (curses)</div>
+                </div>
+                <div class="arch-section">
+                    <div class="arch-section-title">TRANSPORT</div>
+                    <div class="arch-item">WebSocket</div>
+                    <div class="arch-item">REST API</div>
+                </div>
+                <div class="arch-section">
+                    <div class="arch-section-title">SERVER</div>
+                    <div class="arch-item">Session Manager</div>
+                    <div class="arch-item">Plugin System</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="section-title">ABOUT</div>
+            <p class="description">
+                AloneChat is a personal project born out of curiosity and a desire to learn more about<br>
+                real-time communication systems. It's a simple chat application with WebSocket-based<br>
+                messaging, JWT authentication, and a modular plugin architecture.<br><br>
+                This project is far from perfect, but we're trying our best to improve it gradually.<br>
+                Any feedback, suggestions, or contributions would be greatly appreciated.
+            </p>
+
+            <div class="warning-box">
+                Note: On Windows, this project is currently only compatible with Python 3.13 and below<br>
+                due to windows-curses limitations. We apologize for any inconvenience.
+            </div>
+
+            <div class="section-title">FEATURES</div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-name">Real-time Messaging</div>
+                    <div class="feature-desc">WebSocket-based communication with low latency</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-name">JWT Authentication</div>
+                    <div class="feature-desc">Secure token-based authentication system</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-name">Plugin System</div>
+                    <div class="feature-desc">Modular architecture with lifecycle hooks</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-name">Multiple UI Modes</div>
+                    <div class="feature-desc">Both GUI and TUI interfaces available</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-name">Unified Logging</div>
+                    <div class="feature-desc">Comprehensive logging with file rotation</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-name">Session Management</div>
+                    <div class="feature-desc">User presence tracking and cleanup</div>
+                </div>
+            </div>
+
+            <div class="section-title">TECH STACK</div>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">WebSocket</span>
+                <span class="tech-tag">customtkinter</span>
+                <span class="tech-tag">PyJWT</span>
+                <span class="tech-tag">curses</span>
+            </div>
+
+            <div class="section-title">QUICK START</div>
+            <div class="code-block">
+                <span class="comment"># Clone and setup</span><br>
+                git clone https://github.com/alonechat/AloneChat.git<br>
+                cd AloneChat<br>
+                pip install -r requirements.txt<br><br>
+                <span class="comment"># Start server</span><br>
+                <span class="command">python -m AloneChat server --port 8765</span><br><br>
+                <span class="comment"># Start client (GUI)</span><br>
+                <span class="command">python -m AloneChat client</span>
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <div class="links">
+                <a href="https://github.com/alonechat/AloneChat" class="link-item">Repository</a>
+                <a href="https://github.com/alonechat/AloneChat/issues" class="link-item">Issues</a>
+                <a href="https://github.com/alonechat/AloneChat/blob/main/README.md" class="link-item">Documentation</a>
+            </div>
+            <div class="footer-text">Apache License 2.0</div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,3 +1,3 @@
 # alonechat.github.io
 
-AloneChat project profile.
+AloneChat project's profile.
